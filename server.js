@@ -1,8 +1,38 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Krishna');
+    const url = req.url;
+
+     if(url === '/home') {
+        //res.setHeader('Content-Type', 'text/html');
+        res.write('<html>');
+        res.write('<head><title>Home</title></head>');
+        res.write('<body><h1>Welcome to Home</h1></body>');
+        res.write('</html>');
+        return res.end();
+    } else if(url === '/home') {
+        //res.setHeader('Content-Type', 'text/html');
+        res.write('<html>');
+        res.write('<head><title>About</title></head>');
+        res.write('<body><h1>Welcome to About Us Page</h1></body>');
+        res.write('</html>');
+        return res.end();
+    } else if(url === '/node') {
+        //res.setHeader('Content-Type', 'text/html');
+        res.write('<html>');
+        res.write('<head><title>Node</title></head>');
+        res.write('<body><h1>Welcome to my Node JS Project</h1></body>');
+        res.write('</html>');
+        return res.end();
+    }
+    else{
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<html>');
+    res.write('<head><title>My first page</title></head>');
+    res.write('<body><h1>Welcome to my Node JS Project</h1></body>');
+    res.write('</html>');
+    res.end();
+    }
 })
 
 server.listen(4000, () => {
