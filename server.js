@@ -16,10 +16,21 @@ const server = http.createServer((req, res) => {
 
     // Wrting to the file and redirect it with 302
     if(url === '/message' && method === 'POST'){
-        fs.writeFileSync('message.txt', 'DUMMY');
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        return res.end();
+        const body = [];
+        req.on('data', (chunk) => {
+            console.log(chunk);
+            body.push(chunk);
+        });
+        req.on('end', () => {
+            const parseBody = Buffer.concat(body).toString();
+            const message = parseBody.split('=')[1];
+            fs.writeFile('message.txt', message, (err) => {
+                res.statusCode = 302;
+                res.setHeader('Location', '/');
+                return res.end();
+            });
+        });
+        
     }
 
     else if(url === '/home') {
