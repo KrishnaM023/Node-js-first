@@ -19,7 +19,6 @@ const requestHandler = ((req, res) => {
             res.write('</html>');
             return res.end();
         });
-        
     }
 
     // Wrting to the file and redirect it with 302
